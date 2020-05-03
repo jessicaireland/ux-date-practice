@@ -29,10 +29,21 @@
  * 
  * If you are stumped, google it! This is a problem that has been solved many times over.
  */
-function getDayOfTheWeek(date) {
-    // Your Code Here!
-    return "";
-}
+// function getDayOfTheWeek(date) {
+//     Date.getDayOfTheWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+//     return getDayOfTheWeek(date);
+// }
+
+Date.longDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function getDayOfTheWeek(dt)
+    { 
+      return Date.longDays[dt.getDay()]; 
+    }
+
+dt = new Date();
+console.log(getDayOfTheWeek(dt));
 
 
 
@@ -77,10 +88,16 @@ function getDayOfTheWeek(date) {
  */
 function getFormattedDate(date) {
     let month = date.getMonth();
-    // etc...
-    // Your Code Here!
-    return `${month}/ etc...`;
+    let day = date.getDay();
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+   ((date.getHours() % 12 || 12) < 10 ? '0' : '') + (date.getHours() % 12 || 12);
+    if(day < 10) day = "0" + day;
+    if(month < 10) month = "0" + month;
+    return (month + "/" + day + "/" + year + " - " + hour + ":" + minute + ((date.getHours() % 12 || 12) < 10 ? '0' : '') + (date.getHours() % 12 || 12));
 }
+
 
 
 
@@ -112,10 +129,27 @@ function getFormattedDate(date) {
  * 
  */
 function getDaysAgoString(date) {
-    // Your Code Here!
-    return "";
+   today = new Date();
+   let day = today.getDate();
+   let month = today.getMonth()+1;
+   let year = today.getFullYear();
+//    if (day < 10) day = "0" + day;
+//    if (month < 10) month = "0" + month;
+ return (month + "/" + day + "/" + year); 
+   
+   
 }
+let yesterday =  function(date1){
+    let date = new Date(date1);
+  return new Date((dt.setDate(dt.getDate()-1))).toString();
+}
+function diff_days(date2, date1) {
 
+  let diff =(date2.getTime() - date1.getTime()) / 1000;
+  diff /= (60 * 60 * 24 * 7) ;
+  return Math.abs(Math.round(diff));
+  
+ }
 
 /* 
    -------TESTS---------------------------------------------------------------
@@ -126,7 +160,7 @@ function getDaysAgoString(date) {
     console.log("-----Tests for getDayOfTheWeek-----");
 
     {
-        let date = new Date("Sun Apr 05 2020 13:40:31 GMT-0700 (Pacific Daylight Time)");
+        let date = new Date("Sun Apr 05 2020 13:40:31");
         console.log("* Can get Sunday");
         console.log(getDayOfTheWeek(date) === "Sunday");
         console.log("* Can get Monday");
